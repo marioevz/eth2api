@@ -11,6 +11,7 @@ import (
 	"github.com/protolambda/zrnt/eth2/beacon/bellatrix"
 	"github.com/protolambda/zrnt/eth2/beacon/capella"
 	"github.com/protolambda/zrnt/eth2/beacon/common"
+	"github.com/protolambda/zrnt/eth2/beacon/deneb"
 	"github.com/protolambda/zrnt/eth2/beacon/phase0"
 	"github.com/protolambda/ztyp/codec"
 	"github.com/protolambda/ztyp/view"
@@ -213,6 +214,8 @@ func (v *VersionedBeaconBlock) UnmarshalJSON(b []byte) error {
 		data.Data = new(bellatrix.BeaconBlock)
 	case "capella":
 		data.Data = new(capella.BeaconBlock)
+	case "deneb":
+		data.Data = new(deneb.BeaconBlock)
 	default:
 		return fmt.Errorf("unrecognized version: %q", version.Version)
 	}
@@ -254,6 +257,8 @@ func (v *VersionedSignedBeaconBlock) UnmarshalJSON(b []byte) error {
 		data.Data = new(bellatrix.SignedBeaconBlock)
 	case "capella":
 		data.Data = new(capella.SignedBeaconBlock)
+	case "deneb":
+		data.Data = new(deneb.SignedBeaconBlock)
 	default:
 		return fmt.Errorf("unrecognized version: %q", version.Version)
 	}
@@ -296,6 +301,8 @@ func (v *VersionedBeaconState) Tree(spec *common.Spec) (common.BeaconState, erro
 		return bellatrix.AsBeaconStateView(bellatrix.BeaconStateType(spec).Deserialize(r))
 	case "capella":
 		return capella.AsBeaconStateView(capella.BeaconStateType(spec).Deserialize(r))
+	case "deneb":
+		return deneb.AsBeaconStateView(deneb.BeaconStateType(spec).Deserialize(r))
 	default:
 		return nil, fmt.Errorf("unrecognized version: %q", v.Version)
 	}
@@ -316,6 +323,8 @@ func (v *VersionedBeaconState) UnmarshalJSON(b []byte) error {
 		data.Data = new(bellatrix.BeaconState)
 	case "capella":
 		data.Data = new(capella.BeaconState)
+	case "deneb":
+		data.Data = new(deneb.BeaconState)
 	default:
 		return fmt.Errorf("unrecognized version: %q", version.Version)
 	}
