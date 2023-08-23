@@ -106,3 +106,9 @@ func StateValidators(ctx context.Context, cli eth2api.Client,
 	}
 	return eth2api.SimpleRequest(ctx, cli, eth2api.FmtQueryGET(q, "/eth/v1/beacon/states/%s/validators", stateId.StateId()), eth2api.Wrap(dest))
 }
+
+// Returns randao mix for state with given 'stateId'
+func RandaoMix(ctx context.Context, cli eth2api.Client,
+	stateId eth2api.StateId, dest *eth2api.RandaoMixResponse) (exists bool, err error) {
+	return eth2api.SimpleRequest(ctx, cli, eth2api.FmtGET("/eth/v1/beacon/states/%s/randao", stateId.StateId()), eth2api.Wrap(dest))
+}

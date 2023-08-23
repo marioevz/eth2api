@@ -39,6 +39,10 @@ type RootResponse struct {
 	Root common.Root `json:"root"`
 }
 
+type RandaoMixResponse struct {
+	RandaoMix common.Root `json:"randao"`
+}
+
 type FinalityCheckpoints struct {
 	PreviousJustified common.Checkpoint `json:"previous_justified"`
 	CurrentJustified  common.Checkpoint `json:"current_justified"`
